@@ -57,6 +57,7 @@ int main(){
         nReady = select(maxIndexInFdTable+1,&readSet,NULL,NULL,NULL);
 
         if(FD_ISSET(listenFd,&readSet)){//new client connection arive
+            // printf("new connection\n");
             clientAddressLength = sizeof(clientAddress);
             newConnectFd = accept(listenFd,(struct sockaddr*)&clientAddress,&clientAddressLength);
 
