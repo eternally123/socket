@@ -31,55 +31,6 @@ int main(){
 }
 
 
-//void str_client(FILE *fp,int socketFd){
-//    char sendLine[1024],receiveLine[1024];
-//
-//    while(fgets(sendLine,1024,fp)!=NULL){
-//        write(socketFd,sendLine,strlen(sendLine));
-//        if(readline(socketFd,receiveLine,1024)==0){
-//            printf("str_client:server terminated prematurely\n");
-//            exit(1);
-//        }
-//        fputs(receiveLine,stdout);
-//    }
-//}
-
-
-// void str_client(FILE *fp,int socketFd){
-//     int maxFdNum;
-//     fd_set readSet;
-//     char sendLine[1024],receiveLine[1024];
-
-//     FD_ZERO(&readSet);
-
-//     for(;;){
-//         FD_SET(fileno(fp),&readSet);
-//         FD_SET(socketFd,&readSet);
-
-//         maxFdNum = fileno(fp)>socketFd ? fileno(fp) + 1 : socketFd + 1;
-//         select(maxFdNum,&readSet,NULL,NULL,NULL);
-
-//         if(FD_ISSET(socketFd,&readSet)){//socket is readable
-//             if(readline(socketFd,receiveLine,1024)==0){
-//                 printf("str_client:server terminated premature\n");
-//                 exit(1);
-//             }
-//             fputs(receiveLine,stdout);
-//         }
-        
-//         if(FD_ISSET(fileno(fp),&readSet)){//input is readable
-//             if(fgets(sendLine,1024,fp)==NULL)
-//                 return ;
-//            writen(socketFd,sendLine,strlen(sendLine));
-//        }
-//
-//    }
-//
-//
-//
-//}
-
-
 void str_client(FILE *fp,int socketFd){
     int maxFdNum,stdinEOF;
     fd_set readSet;

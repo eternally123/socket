@@ -57,6 +57,7 @@ void str_echo(int socketFd){
             continue;
         else if (n<0){
             printf("str_echo:read error\n");
+            close(socketFd);
             exit(1);
         }
     }
