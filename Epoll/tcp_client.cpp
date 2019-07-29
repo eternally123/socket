@@ -31,6 +31,54 @@ int main(){
 }
 
 
+//void str_client(FILE *fp,int socketFd){
+//    char sendLine[1024],receiveLine[1024];
+//
+//    while(fgets(sendLine,1024,fp)!=NULL){
+//        write(socketFd,sendLine,strlen(sendLine));
+//        if(readline(socketFd,receiveLine,1024)==0){
+//            printf("str_client:server terminated prematurely\n");
+//            exit(1);
+//        }
+//        fputs(receiveLine,stdout);
+//    }
+//}
+
+
+// void str_client(FILE *fp,int socketFd){
+//     int maxFdNum;
+//     fd_set readSet;
+//     char sendLine[1024],receiveLine[1024];
+
+//     FD_ZERO(&readSet);
+
+//     for(;;){
+//         FD_SET(fileno(fp),&readSet);
+//         FD_SET(socketFd,&readSet);
+
+//         maxFdNum = fileno(fp)>socketFd ? fileno(fp) + 1 : socketFd + 1;
+//         select(maxFdNum,&readSet,NULL,NULL,NULL);
+
+//         if(FD_ISSET(socketFd,&readSet)){//socket is readable
+//             if(readline(socketFd,receiveLine,1024)==0){
+//                 printf("str_client:server terminated premature\n");
+//                 exit(1);
+//             }
+//             fputs(receiveLine,stdout);
+//         }
+        
+//         if(FD_ISSET(fileno(fp),&readSet)){//input is readable
+//             if(fgets(sendLine,1024,fp)==NULL)
+//                 return ;
+//            writen(socketFd,sendLine,strlen(sendLine));
+//        }
+//
+//    }
+//
+//
+//
+//}
+
 
 void str_client(FILE *fp,int socketFd){
     int maxFdNum,stdinEOF;
@@ -41,7 +89,7 @@ void str_client(FILE *fp,int socketFd){
     stdinEOF = 0;
     FD_ZERO(&readSet);
 
-    while(1){
+    for(;;){
         if(stdinEOF == 0)
             FD_SET(fileno(fp),&readSet);
         FD_SET(socketFd,&readSet);
@@ -51,17 +99,15 @@ void str_client(FILE *fp,int socketFd){
 
         if(FD_ISSET(socketFd,&readSet)){//socket is readable
             // printf("\nread from socket...\n");
-            nRead = read(socketFd,buf,1024);
-            if(nRead == 0){//no data
-                if(stdinEOF==1){//client won't send data & server won't send data
+            if((nRead = read(socketFd,buf,1024)) == 0){//no data
+                if(stdinEOF==1)//client won't send data & server won't send data
                     return ;
-                }else{//client doesn't stop writing data,but read nothing from server,error
+                else{
                     printf("str_cli:server terminated prematurely\n");
                     exit(1);
                 }
-            }else{
-                write(fileno(stdout),buf,nRead);
             }
+            write(fileno(stdout),buf,nRead);
         }
         
         if(FD_ISSET(fileno(fp),&readSet)){//input is readable
@@ -71,9 +117,8 @@ void str_client(FILE *fp,int socketFd){
                 shutdown(socketFd,SHUT_WR);//won't send data . shutdown .send FIN
                 FD_CLR(fileno(fp),&readSet);
                 continue;
-           }else{//read data from fp, need to write to server
-               int num = writen(socketFd,buf,nRead);
            }
+           int num = writen(socketFd,buf,nRead);
         }
     }
 }

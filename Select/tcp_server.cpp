@@ -8,8 +8,9 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <errno.h>
+// #include <sys/select.h>
 
-void str_echo(int socketFd);
+// void str_echo(int socketFd);
 
 int main(){
     int i;
@@ -52,8 +53,8 @@ int main(){
 
 
     //accept client connect
-    for ( ; ; ){
-        readSet = allSet;//?????
+    while(1){
+        readSet = allSet;//set all Fd
         nReady = select(maxIndexInFdTable+1,&readSet,NULL,NULL,NULL);
 
         if(FD_ISSET(listenFd,&readSet)){//new client connection arive
@@ -67,8 +68,8 @@ int main(){
                     break;
                 }
             
-            if(i == FD_SETSIZE){
-                printf("too many clients......\n");//??? accept
+            if(i == FD_SETSIZE){//??? accept
+                printf("too many clients......\n");
                 exit(1);
             }
 
@@ -86,11 +87,11 @@ int main(){
             if((connectedFd = clientConnectionArray[i])<0)
                 continue;
             if(FD_ISSET(connectedFd,&readSet)){//readable 
-                if((nRead = read(connectedFd,buf,1024))==0){
-                    //connection closed by client
+                nRead = read(connectedFd,buf,1024);
+                if(nRead ==0){//connection closed by client
                     close(connectedFd);
-                    FD_CLR(connectedFd,&allSet);
-                    clientConnectionArray[i] = -1;
+                    FD_CLR(connectedFd,&allSet);//remove Fd
+                    clientConnectionArray[i] = -1;//remove Fd
                 }else{
                     writen(connectedFd,buf,nRead);
                 }
@@ -105,21 +106,21 @@ int main(){
 
 
 
-void str_echo(int socketFd){
-    ssize_t n;
-    char buf[1024];
-    while(true){
-        while((n = read(socketFd,buf,1024))>0)
-            writen(socketFd,buf,n);
+// void str_echo(int socketFd){
+//     ssize_t n;
+//     char buf[1024];
+//     while(true){
+//         while((n = read(socketFd,buf,1024))>0)
+//             writen(socketFd,buf,n);
 
-        if(n<0 && errno == EINTR)
-            continue;
-        else if (n<0){
-            printf("str_echo:read error\n");
-            exit(1);
-        }
-    }
-}
+//         if(n<0 && errno == EINTR)
+//             continue;
+//         else if (n<0){
+//             printf("str_echo:read error\n");
+//             exit(1);
+//         }
+//     }
+// }
 
 
 
