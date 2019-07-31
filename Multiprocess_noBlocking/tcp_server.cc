@@ -65,7 +65,7 @@ int main(){
 }
 
 void str_echo(int sockfd){
-	    //add
+	//add
     #define MAXLINE 1024
     //end
 
