@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "utils.hpp"
 
 #include <stdio.h>
 #include <string.h>
@@ -71,7 +71,7 @@ int main(){
                 if(events[i].data.fd ==listenFd){//如果新监测到一个SOCKET用户连接到了绑定的SOCKET端口，建立新的连接。
                     newConnectFd = accept(listenFd,(sockaddr *)&clientAddress, &clientAddressLength);
                     if(newConnectFd<0){
-                        printf("newConnectFd<0 \n");
+                        printf("newConnectFd<0 errno = %d\n",errno);
                         exit(1);
                     }
                     //setnonblocking(newConnectFd);
@@ -112,7 +112,7 @@ int main(){
                         ev.data.fd = connectedFd;//设置用于写操作的文件描述符
                         ev.events=EPOLLOUT|EPOLLET;//设置用于注测的写操作事件
                         epoll_ctl(epollFd,EPOLL_CTL_MOD,connectedFd,&ev);//修改connectedFd上要处理的事件为EPOLLOUT
-                    }                    
+                    }
                 }else if(events[i].events&EPOLLOUT){//有数据发送
                     connectedFd = events[i].data.fd;
                     write(connectedFd, buf, nRead);
