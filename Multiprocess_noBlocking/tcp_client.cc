@@ -40,46 +40,6 @@ int main(){
     exit(0);
 }
 
-// void str_client(FILE *fp,int socketFd){
-//     char sendLine[BUFFER_SIZE],receiveLine[BUFFER_SIZE];
-
-//     while(fgets(sendLine,BUFFER_SIZE,fp)!=NULL){
-//         write(socketFd,sendLine,strlen(sendLine));
-//         if(readline(socketFd,receiveLine,BUFFER_SIZE)==0){
-//             printf("str_client:server terminated prematurely\n");
-//             exit(1);
-//         }
-//         fputs(receiveLine,stdout);
-//     }
-// }
-
-// void str_client(FILE *fp,int socketFd){
-//     char sendLine[BUFFER_SIZE],receiveLine[BUFFER_SIZE];
-
-//     while(fgets(sendLine,BUFFER_SIZE,fp)!=NULL){
-//         write(socketFd,sendLine,1);
-//         sleep(1);
-//         write(socketFd,sendLine + 1,strlen(sendLine) - 1);
-        
-//         printf("...%d\n",errno);
-
-//         if(readline(socketFd,receiveLine,BUFFER_SIZE)==0){
-//             printf("str_client:server terminated prematurely\n");
-//             exit(1);
-//         }
-//         fputs(receiveLine,stdout);
-//     }
-// }
-
-
-// void sig_do(int signo){
-//     pid_t pid;
-//     int stat;
-//     printf("%d:sig_do\n",signo);
-
-//     return ;
-// }
-
 
 int connect_nonb(int sockfd,sockaddr *saptr, socklen_t salen, int nsec)
 {
@@ -252,5 +212,5 @@ void str_client(FILE *fp, int sockfd){
 		}
 	}
 }
-/* end nonb3 */
+
 

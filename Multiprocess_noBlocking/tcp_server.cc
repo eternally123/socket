@@ -98,24 +98,7 @@ void str_echo(int sockfd){
 		select(maxfdp1, &rset, &wset, NULL, NULL);
         printf("after select...\n");
 
-		// if (FD_ISSET(STDIN_FILENO, &rset)) {
-		// 	printf("read from stdin\n");
-        //     if ( (n = read(STDIN_FILENO, toiptr, &to[MAXLINE] - toiptr)) < 0) {
-		// 		if (errno != EWOULDBLOCK){
-        //             printf("read error on stdin\n");
-        //             exit(1);
-        //         }
-		// 	} else if (n == 0) {
-		// 		// fprintf(stderr, "%s: EOF on stdin\n", gf_time());
-		// 		stdineof = 1;			/* all done with stdin */
-		// 		if (tooptr == toiptr)
-		// 			shutdown(sockfd, SHUT_WR);/* send FIN */
-		// 	} else {
-		// 		// fprintf(stderr, "%s: read %d bytes from stdin\n", gf_time(), n);
-		// 		toiptr += n;			/* # just read */
-		// 		FD_SET(sockfd, &wset);	/* try and write to socket below */
-		// 	}
-		// }
+
 
 		if (FD_ISSET(sockfd, &rset)) {
             printf("read from client\n");
@@ -139,20 +122,6 @@ void str_echo(int sockfd){
 			}
 		}
 
-		// if (FD_ISSET(STDOUT_FILENO, &wset) && ( (n = friptr - froptr) > 0)) {
-        //     printf("write to stdout\n");
-		// 	if ( (nwritten = write(STDOUT_FILENO, froptr, n)) < 0) {
-		// 		if (errno != EWOULDBLOCK){
-        //             printf("write error to stdout\n");
-        //             exit(1);
-        //         }
-		// 	} else {
-		// 		// fprintf(stderr, "%s: wrote %d bytes to stdout\n",gf_time(), nwritten);
-		// 		froptr += nwritten;		/* # just written */
-		// 		if (froptr == friptr)
-		// 			froptr = friptr = fr;	/* back to beginning of buffer */
-		// 	}
-		// }
 
 		if (FD_ISSET(sockfd, &wset) && ( (n = iptr - optr) > 0)) {
             printf("write to client\n");
@@ -174,35 +143,6 @@ void str_echo(int sockfd){
 	}
 }
 
-
-
-// void str_echo(int socketFd){
-//     ssize_t n;
-//     char buf[BUFFER_SIZE];
-
-//     while(true){
-//         printf("before read...n=%d\n",n);
-//         n = read(socketFd,buf,BUFFER_SIZE);
-//         printf("after read...n=%d\n",n);
-//         if(n>0){//read data from client
-//             writen(socketFd,buf,n);
-//             continue;
-//         }else if (n<0){
-//             printf("n<0:n=%d\n",n);
-//             if(errno == EINTR){//interupt by system. read again
-//                 printf("interupt by system  EINTR. read again\n");
-//                 continue;
-//             }else if(errno == ECONNABORTED){//client send RST before accept
-//                 printf("interupt by system  ECONNABORTED. read again\n");
-//             }else{
-//                 printf("str_echo:read error\n");
-//                 exit(1);
-//             }
-//         }else{//n==0 connection closed by client
-//             return;
-//         }
-//     }
-// }
 
 void sig_child(int signo){
     pid_t pid;

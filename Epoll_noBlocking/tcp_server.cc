@@ -126,6 +126,7 @@ int main(){
                                 printf("read error on socket\n");
                                 continue;
                             }else if (errno == ECONNRESET) {//RST
+                                epoll_ctl(epollFd,EPOLL_CTL_DEL,connectedFd,&ev);
                                 close(connectedFd);
                                 events[i].data.fd = -1;
                                 continue;
