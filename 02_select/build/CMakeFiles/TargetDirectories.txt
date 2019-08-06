@@ -1,4 +1,0 @@
-/home/shiliangw/user/laboratory/UNP/socketProgramming/02_select/build/CMakeFiles/rebuild_cache.dir
-/home/shiliangw/user/laboratory/UNP/socketProgramming/02_select/build/CMakeFiles/server.dir
-/home/shiliangw/user/laboratory/UNP/socketProgramming/02_select/build/CMakeFiles/edit_cache.dir
-/home/shiliangw/user/laboratory/UNP/socketProgramming/02_select/build/CMakeFiles/client.dir
