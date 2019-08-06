@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/client.dir/src/client.cc.o CMakeFiles/client.dir/src/network.cc.o  -o ../bin/client 
