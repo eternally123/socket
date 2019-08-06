@@ -1,1 +1,5 @@
 .vscode/
+
+01_multiprocess/build/
+02_select/build/
+03_poll/build/
