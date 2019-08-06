@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/config.hpp
+
+../include/network.hpp
+unistd.h
+-
+
+/home/shiliangw/user/laboratory/UNP/socketProgramming/02_select/src/server.cc
+network.hpp
+/home/shiliangw/user/laboratory/UNP/socketProgramming/02_select/src/network.hpp
+config.hpp
+/home/shiliangw/user/laboratory/UNP/socketProgramming/02_select/src/config.hpp
+stdio.h
+-
+string.h
+-
+stdlib.h
+-
+unistd.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+netinet/in.h
+-
+errno.h
+-
+iostream
+-
+
