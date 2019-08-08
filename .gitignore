@@ -9,3 +9,16 @@
 03_poll/build/
 03_poll/bin/
 
+04_multithread/build
+04_multithread/bin
+
+05_epoll/build
+05_epoll/bin
+
+06_epoll_noblocking/build
+06_epoll_noblocking/bin
+
+07_epoll_class/build
+07_epoll_class/bin
+
+client/

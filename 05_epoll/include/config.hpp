@@ -1,0 +1,13 @@
+#ifndef _CONFIG_HPP_
+#define _CONFIG_HPP_
+
+#define LISTEN_QUEUE_NUM 1024
+
+#define EPOLL_NUM 1024
+#define EPOLL_EVENTS_NUM 20
+#define EPOLL_TIME_OUT 3000
+
+#define BUFFER_SIZE 4096
+
+
+#endif

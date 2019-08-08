@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/server.dir/src/server.cc.o CMakeFiles/server.dir/src/network.cc.o CMakeFiles/server.dir/src/epoll.cc.o  -o ../bin/server 
