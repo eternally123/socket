@@ -23,6 +23,9 @@ int main(int argc,char* argv[]){
 
     int socketfd;
     socketfd = open_connectfd(argv[1],atoi(argv[2]));
+
+    //sleep(5);
+    //std::cout<<"5s later"<<std::endl;
     str_client(stdin,socketfd);
     exit(0);
 }

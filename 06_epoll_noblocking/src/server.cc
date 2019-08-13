@@ -43,6 +43,7 @@ int main(int argc,char* argv[]){
                 std::cerr << "start listen" << std::endl;
                 /* 如果新监测到一个SOCKET用户连接到了绑定的SOCKET端口，建立新的连接。 */
                 new_connectfd = accept_client(listenfd);
+                std::cout<<"new_connectfd:"<<new_connectfd<<std::endl;
                 if(new_connectfd == -1){
                     std::cerr << "accept error " << std::endl;
                     break;
