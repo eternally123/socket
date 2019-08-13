@@ -21,7 +21,7 @@ int main(int argc,char* argv[]){
 
     if(argc != 2){
         std::cerr<< "argument num incorrect!"<< std::endl;
-        exit(0); 
+        exit(1); 
     }
 
     int listenfd,new_connectfd,epollfd,connectedfd;
