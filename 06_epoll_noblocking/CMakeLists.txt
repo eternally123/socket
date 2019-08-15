@@ -12,6 +12,7 @@ add_executable(
     src/server.cc
     src/network.cc
     src/epoll.cc
+    src/buffer.cc
 ) #编译所用到的文件
 
 # add_executable(
